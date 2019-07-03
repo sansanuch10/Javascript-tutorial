@@ -878,8 +878,7 @@ function server() {
           if (pathname === 'iframe.html') {
             pathname = 'projects/' + projectName + '/' + pathname;
           }
-          temp = fs.createWriteStream(pathname, (err) => { console.log('===createWriteStream:' + err) });
-          console.log('----pathname: ', pathname);
+          temp = fs.createWriteStream(pathname);
           temp.on('error', (err) => {
             if ('ENOENT' == err.code) {
               arr = pathname.split('/');
@@ -890,7 +889,7 @@ function server() {
               // fs.mkdirSync(arr);
               arr += '/' + el;
               console.log('=============arr:***3 ' + arr);
-              temp = fs.createWriteStream(arr, (err) => { console.log(err) });
+              temp = fs.createWriteStream(arr);
               temp.on('error', (err) => {
                 res.statusCode = 500;
                 res.end();
@@ -900,7 +899,7 @@ function server() {
               res.end();
             }
           });
-          req.pipe(temp, { end: false }, (err) => { console.log(err) });
+          req.pipe(temp, { end: false });
           req.on('end', () => {
             console.log('PUT: ' + pathname);
             if (projectName === 'Original') {

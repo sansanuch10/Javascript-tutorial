@@ -876,9 +876,10 @@ function server() {
           }
           if (projectName !== ORIGINAL && (file === 'index.js' || file === 'map_list' || file === 'files_list')) return;
           if (pathname === 'iframe.html') {
-            pathname = 'projects/' + projectName + '/' + pathname
+            pathname = 'projects/' + projectName + '/' + pathname;
           }
-          temp = fs.createWriteStream(pathname, (err) => { console.log(err) });
+          temp = fs.createWriteStream(pathname, (err) => { console.log('===createWriteStream:' + err) });
+          console.log('----pathname: ', pathname);
           temp.on('error', (err) => {
             if ('ENOENT' == err.code) {
               arr = pathname.split('/');

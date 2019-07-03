@@ -548,7 +548,7 @@ let mapList,host;client();function client() {
         setTimeout(() => {
           _data_(el, 'data-code_edit', el.getAttribute('data-code_edit_run'));
           window.scrollBy(0, 5);
-        }, 350);
+        }, 400);
         break;
       }
       case 'code_run': {

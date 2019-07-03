@@ -881,19 +881,7 @@ function server() {
           temp = fs.createWriteStream(pathname);
           temp.on('error', (err) => {
             if ('ENOENT' == err.code) {
-              arr = pathname.split('/');
-              console.log('===========arr:*** ' + arr);
-              el = arr.pop();
-              arr = arr.join('/')
-              console.log('============arr:***2 ' + arr);
-              // fs.mkdirSync(arr);
-              arr += '/' + el;
-              console.log('=============arr:***3 ' + arr);
-              temp = fs.createWriteStream(arr);
-              temp.on('error', (err) => {
-                res.statusCode = 500;
-                res.end();
-              });
+              console.log('ENOENT: ', err);
             } else {
               res.statusCode = 500;
               res.end();

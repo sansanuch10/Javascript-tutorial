@@ -1,4 +1,4 @@
-let mapList,host;client();function client() {
+let mapList, host; client(); function client() {
   host = window.location.href.split('#')[0];
   let getBy = (function getByTagOrID() {
     let t;
@@ -71,7 +71,6 @@ let mapList,host;client();function client() {
     removeEl('page__nav-wrap');
     removeEl('tablet-only');
     removeEl('comments');
-    // removeEl('');
     removeEl('task__open-link');
     removeEl('close-button');
     removeEl('task__solution');
@@ -273,7 +272,6 @@ let mapList,host;client();function client() {
 
   function forFrame_(parent, res) {
     res = styleAndScript(parent, res, 0);
-    // styleAndScript();
     if (res) {
       if (res.indexOf('<div>') === 0) {
         res = res.slice(6, -6);
@@ -468,7 +466,6 @@ let mapList,host;client();function client() {
         } else if (el2 && (el2.tagName === 'IFRAME')) {
           setHost(el2);
           if (val === '?') {
-            // el2.src = el2.getAttribute('src') + "?cache=" + new Date().getTime();
             temp = el2.contentWindow.document.body;
             if (temp.attributes[0])
               temp.removeAttribute(temp.attributes[0].name);
@@ -580,20 +577,6 @@ let mapList,host;client();function client() {
           el2 = 'iframe.html';
           httpSend('PUT', el2, getHTML(parent, val));
           el1.contentWindow.document.location.href = el2;
-          // if (val === 'edit') {
-          //   // el1.contentWindow.window.onload = function () {
-          //   setTimeout(() => {
-          //     arr = el1.contentWindow.document.documentElement.querySelectorAll('script');
-          //     console.log('arr: ', arr);
-          //     for (let i = 0, l = arr.length; i < l; i++) {
-          //       if (arr[i].hasAttribute('src')) {
-          //         arr[i].src = arr[i].src;
-          //       }
-          //     }
-          //     _data_(el, 'data-code_edit');
-          //   }, 200)
-          //   // }
-          // }
           return el1;
         }
         break;
@@ -615,7 +598,6 @@ let mapList,host;client();function client() {
           el.firstElementChild.removeAttribute('style');
           el.setAttribute('toggle', '');
         };
-        // createCodeExample(el);
         break;
       }
       case 'create_file': {
@@ -652,9 +634,6 @@ let mapList,host;client();function client() {
               {
                 temp = el.parentElement.getElementsByTagName('input')[0].value;
                 window.open('https://learn.javascript.ru/search?query=' + temp);
-                //el.setAttribute('href', 'https://learn.javascript.ru/search?query=' + temp);
-                //console.log(attr + ': ' + temp);
-                //el.onclick();
                 break;
               }
             case '-':
@@ -768,7 +747,6 @@ let mapList,host;client();function client() {
       case 'save_css': {
         sheets = document.styleSheets;
         temp1 = outerCSS[pageNumber];
-        //el1 = projectName === 'Original' ? '' : '/projects/' + projectName;
         for (let i = 0, l = sheets.length; i < l; i++) {
           temp = sheets[i].href;
           if (!temp) continue;
@@ -786,7 +764,7 @@ let mapList,host;client();function client() {
       }
       case 'save_js': {
         temp = 'let mapList,host;client();' + client.toString();
-        //temp1 = minifyJS(temp1);
+        //temp = minifyJS(temp);
         httpSend('PUT', '/projects/' + projectName + '/js/client.js', temp);
         temp = 'let HOME, TASKOPEN, BANNERBOTTOM, COMMENT, TOOLBAR, NAVBOOK, STAR, CLOSE, CODETOOLBAR, OPENLINK, DOWNLOAD;icon();' + icon.toString();
         httpSend('PUT', '/projects/' + projectName + '/js/icon.js', temp);
@@ -835,23 +813,10 @@ let mapList,host;client();function client() {
       }
       case 'see_html': {
         seeHTML(pageNumber);
-        //if (getBy(0, 'map_list')) {
-        //  //console.log('map: ' + getMapList.toString());
-        //  temp = getMapList.toString() + 'getMapList();';
-        //  //temp = minifyJS(temp);
-        //  httpSend('PUT', '/map_list.js', temp);
-        //}
         break;
       }
       case 'set_toggle': {
-        // el1 = el.parentElement;
-        // console.log('el1: ', el1.tagName);
-        // if (el1) {
-        //   el2 = el1.parentElement;
-        //   console.log('el2: ', el2.tagName);
-        //   if (el2)
         el.parentElement.firstElementChild.firstElementChild.setAttribute('toggle', '');
-        // }
         break;
       }
       case 'show_tasks': {
@@ -868,8 +833,6 @@ let mapList,host;client();function client() {
       case 'show_task': {
         el2 = getBy(0, 'task-show');
         if (!el2) {
-          // if (el.toggle)
-          //   _h_.h(event, el, 'mouseout');
           t1 = el.parentElement.parentElement;
           t1.id = 'task-show';
           t1.onscroll = function name(t) {
@@ -882,34 +845,17 @@ let mapList,host;client();function client() {
             }
           }
           temp = t1.getElementsByTagName('button-answer')[0];
-          // if (temp.toggle) temp.click();
           el2 = document.createElement('a');
           el2.setAttribute('data-show_task', '');
           el2.innerHTML = 'Вернуться к уроку';
           t1.insertBefore(el2, el.parentElement);
           document.body.style.overflow = 'hidden';
-          // el2.innerHTML = '<a data-show_task>Вернуться к уроку</a>' + el.parentElement.parentElement.outerHTML;
-          // if (t1.querySelector('iframe')) {
-          //   // t1.parentElement.insertBefore(el2, getBy(0, 'tasks'));
-          //   el2.task = t1.parentElement.replaceChild(el2, t1);
-          // } else
-          //   document.body.appendChild(el2);
           el.title = 'Закрыть задачу';
-          // console.log(' getBy(\'task-show\'): ', getBy('task-show').tagName);
-          // для, типа slider.js или с <irame>
-          // setTimeout(() => {
-          //   reloadScripts();
-          // }, 100);
         } else {
           el2.removeAttribute('id');
           el2.firstElementChild.remove();
           document.body.removeAttribute('style');
           el2.getElementsByTagName('task-open')[0].title = 'Открыть задачу';
-          // el2.remove();
-          // el2.parentElement.replaceChild(el2.task, el2);
-          // setTimeout(() => {
-          //   reloadScripts();
-          // }, 100);
         }
         break;
       }
@@ -967,8 +913,6 @@ let mapList,host;client();function client() {
       }
       case 'slide_1_left': {
         if (counterSlide1 > 0) {
-          //temp = Math.round(+getComputedStyle(getBy('slides')).width.slice(0, -2));
-          //temp1 = 4250 / (temp * 0.8);
           counterSlide1--;
           document.getElementsByTagName('slides-')[1].firstElementChild.style.transform = 'translateX(-' + counterSlide1 * 8 + '0%)';
           if (counterSlide1 >= 4) {
@@ -1241,7 +1185,6 @@ let mapList,host;client();function client() {
                 ch.setAttribute('toggle-style', ch.style.cssText);
                 ch.style.cssText += ';' + swapStyle;
               } else {
-                // ch.style.cssText = ch.toggle_cssText;
                 if (!(ch.style.cssText = ch.toggle_cssText)) ch.removeAttribute('style');
               }
             }
@@ -1314,9 +1257,6 @@ let mapList,host;client();function client() {
                 ch.focus();
               }
             } else {
-              //temp = ch.getAttribute('js-hover');
-              //if (temp)
-              //  hoverJS(ch, temp);
               hoverEl(ch);
             }
             findPartners(ch);
@@ -1370,17 +1310,6 @@ let mapList,host;client();function client() {
         type = tp ? tp : event.type;
         tName = t.tagName;
         rltName = event && event.relatedTarget ? event.relatedTarget.tagName : '';
-        //if (type !== 'click') {
-        //  //hoverJS(t, temp);
-        //  temp = t.getAttribute('js-hover');
-        //  if (temp) {
-        //    _hoverJS_(t, temp);
-        //    //script = document.createElement('script');
-        //    //script.innerHTML = temp + '()';
-        //    //document.body.appendChild(script);
-        //    //script.remove();
-        //  }
-        //}
         for (let i = 0, l = t.attributes.length; i < l; i++) {
           if (t && t.attributes[i])
             temp = t.attributes[i].name;
@@ -1416,9 +1345,6 @@ let mapList,host;client();function client() {
             t = document.getElementsByTagName('search-popup')[0];
             if (t && t.toggle) {
               t.click();
-              // setTimeout(() => {
-              //   media.mediaMax(); 
-              // }, 550); 
             }
             t = document.getElementsByTagName('curtain-')[0];
             if (t && t.style.display !== 'none') {
@@ -1453,10 +1379,7 @@ let mapList,host;client();function client() {
     content_type = content_type || 'multipart/form-data;charset=UTF-8';
     xhttp = new XMLHttpRequest();
     xhttp.open(method, path, true);
-    //if (content_type) {
     xhttp.setRequestHeader('Content_type', content_type);
-    //} else
-    //  xhttp.setRequestHeader('Content-type', 'multipart/form-data');
     xhttp.send(sending);
     return xhttp;
   }
@@ -1561,7 +1484,6 @@ let mapList,host;client();function client() {
       style.top = event.pageY - window.pageYOffset + 'px';
     }
   }
-  //let alfabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n'];
   let coordsH2 = [],
     coordComments;
 
@@ -1666,7 +1588,6 @@ let mapList,host;client();function client() {
           el2[j].firstChild.setAttribute('class', 'star_off');
       }
     }
-
   }
   let currentLink = 1;
   function setActiveLink(j) {
@@ -1882,7 +1803,6 @@ let mapList,host;client();function client() {
     deleteClone('stars-');
     deleteClone('banner-bottom');
     deleteClone('code-download');
-    //deleteClone('close-', 0);
     switch (pageNumber) {
       case 'a':
         {
@@ -1903,7 +1823,6 @@ let mapList,host;client();function client() {
   }
   function loadFrame(parent, cb, i_) {
     if (parent) {
-      // el.firstElementChild.remove();
       xhttp = httpSend("GET", parent.getAttribute('src'));
       xhttp.onreadystatechange = function () {
         if (xhttp.readyState != 4)
@@ -1944,7 +1863,6 @@ let mapList,host;client();function client() {
       outerCSS[n] && (temp = outerCSS[n] + '.css');
       link.href = temp;
     }
-    //temp = projectName === 'Original' ? '/main/' : '/projects/' + projectName + '/main/';
     if (n !== 'l' && n !== currentPage)
       prePage = currentPage || n;
     getBy('back-forth').setAttribute('data-load_page', prePage);
@@ -1957,7 +1875,6 @@ let mapList,host;client();function client() {
       n = page[0];
     }
     xhttp = httpSend("POST", '/projects/' + projectName + '/main/' + n);
-    // pageNumber === 'l' && cancelMap();
     xhttp.onreadystatechange = function () {
       if (xhttp.readyState != 4)
         return;
@@ -1965,30 +1882,15 @@ let mapList,host;client();function client() {
         window.removeEventListener('scroll', media.mediaMax);
         res = xhttp.responseText;
         if (n === 'l') {
-          //xhttp1 = httpSend("POST", '/projects/' + projectName + '/js/map.js');
-          //xhttp1.onreadystatechange = function () {
-          //  if (xhttp1.readyState != 4)
-          //    return;
-          //  if (xhttp1.status == 200) {
-          //    temp = document.createElement('script');
-          //    temp.id = 'map_list';
-          //    temp.innerHTML = xhttp1.responseText;
-          //    document.body.appendChild(temp);
-          //  } else if (xhttp1.status == 404) {
-          //    alert('The page: \"' + projectName + '/' + pageNumber + '\"  NOT EXIST!');
-          //  }
-          //};
           el1 = document.createElement('map-');
           el1.id = n;
           el1.innerHTML = res;
           el2 = getBy('main');
           el2.h1 = getBy('h1').innerHTML;
           el2.innerHTML = el1.outerHTML;
-          // document.body.appendChild(temp);
           reloadScripts();
           temp = getBy('map-filter').firstElementChild;
           temp.focus();
-          // window.scrollTo(0, localStorage.getItem('pageYOffset_' + projectName + '_' + pageNumber));
           localStorage.setItem('if_map', pageNumber);
           temp.oninput = function () {
             if (this.value)
@@ -2027,10 +1929,8 @@ let mapList,host;client();function client() {
             }
             if (getBy('menu-development')) {
               doReload(res);
-              // reloadScripts();
             } else {
               getBy('main').outerHTML = res;
-              // reloadScripts();
             }
             loadFrame();
             reloadScripts();
@@ -2041,7 +1941,6 @@ let mapList,host;client();function client() {
             }
           }
         initPageData(n.toString());
-        // setSideBar();
         addEl_setStyle();
         setSideBar();
         if (path[2] === projectName) {
@@ -2049,14 +1948,11 @@ let mapList,host;client();function client() {
           localStorage.setItem(projectName, n.toString());
         }
         if (n !== 'g' && n !== 'h' && n !== 'l') {
-          // createCodeExample();
           temp = getBy('h1');
           if (temp)
             document.getElementsByTagName('title')[0].text = temp.innerHTML;
           setTimeout(createCodeExample, 0);
-          // window.scrollTo(0, localStorage.getItem('pageYOffset_' + projectName + '_' + pageNumber));
           sidebarHeight = '';
-          // media.mediaMax();
           setTimeout(() => {
             el1 = getBy('share-');
             el2 = +getComputedStyle(el1).bottom.split('.')[0];
@@ -2066,9 +1962,6 @@ let mapList,host;client();function client() {
             getCoordComments();
             media.mediaMax();
             window.addEventListener('scroll', media.mediaMax);
-            // setTimeout(() => {
-            // media.mediaMax();
-            // }, 500);
           }, 500);
         }
         if (page[1]) {
@@ -2125,7 +2018,7 @@ let mapList,host;client();function client() {
           arr[i].previousElementSibling.click();
           arr[i].id = 'scrollintoview';
           setTimeout(() => {
-            getBy(0, 'scrollintoview').scrollIntoView(top);
+            getBy(0, 'scrollintoview').scrollIntoView(false);
           }, 0);
           return;
         }
@@ -2233,51 +2126,46 @@ let mapList,host;client();function client() {
       arr[i] = el1.join('`</script>');
     }
     el.innerHTML = arr.join('<script>`');
-    // el.innerHTML = el.innerHTML.split('>\n').join('>').split('>            <').join('><').split('>          <').join('><').split('>        <').join('><').split('>      <').join('><').split('>    <').join('><').split(':  <').join(':*@#<').split(': <').join(':*@#<');
-    +
-      function minifyElem(el, arr, l, exx) {
-        arr = el.childNodes;
-        l = arr.length;
-        if (l > 0) {
-          for (let i = l - 1; i >= 0; i--) {
-            if (arr[i].nodeType === 3) {
-              if (arr[i - 1] && arr[i - 1].tagName === 'BLOCKQUOTE' && arr[i - 1].tagName === 'PRE') {
-                continue;
-              }
-              // if (arr[i].data.startsWith('\n') && arr[i].data.endsWith('  ') && arr[i].data.indexOf(':') === -1)
-              else if (arr[i].data.search(/./) === -1) {
-                arr[i].remove();
-              } else {
-                arr[i].data = arr[i].data.split('\n').join('').split('            ').join(' ').split('          ').join(' ').split('        ').join(' ').split('      ').join(' ').split('    ').join(' ').split('  ').join(' ')
-                // .split(' = ').join('&nbsp;=&nbsp;').split(' { ').join('&nbsp;{&nbsp;').split(' + ').join('&nbsp;+&nbsp;').split(' - ').join('&nbsp;-&nbsp;').split(' } ').join('&nbsp;}&nbsp;').split(' }').join('&nbsp;}').split('{ ').join('{&nbsp;').split(' / ').join('&nbsp;/&nbsp;')
-                // .split('; ').join(';*@#')
-              }
-            } else if (arr[i].nodeType === 1 && arr[i].tagName !== 'BLOCKQUOTE' && arr[i].tagName !== 'PRE') {
-              if (arr[i].tagName === 'SCRIPT' && arr[i].innerHTML.indexOf('`') < 3 && arr[i].innerHTML.indexOf('`') !== -1) {
-                continue;
-              }
-              if (arr[i].tagName === 'STYLE' || arr[i].tagName === 'SCRIPT') {
-                arr[i].innerHTML = arr[i].innerHTML.split('\n').join('').split('            ').join(' ').split('          ').join(' ').split('        ').join(' ').split('      ').join(' ').split('    ').join(' ').split('  ').join(' ');
-                temp = arr[i].innerHTML.split("'");
-                for (let i = 0, l = temp.length; i < l; i = i + 2) {
-                  exx = temp[i].split('"');
-                  if (exx.length) {
-                    for (let j = 0, ll = exx.length; j < ll; j = j + 2) {
-                      exx[j] = exx[j].split(' { ').join('{').split(' + ').join('+').split(' - ').join('-').split(' } ').join('}').split(' }').join('}').split('{ ').join('{').split(' / ').join('/').split(' < ').join('<').split(' > ').join('>').split(' ! ').join('!').split(' && ').join('&&').split(' || ').join('||').split(' === ').join('===').split(', ').join(',').split('; ').join(';').split(': ').join(':').split(' = ').join('=');
-                    }
-                    temp[i] = exx.join('"');
-                  } else {
-                    temp[i] = temp[i].split(' { ').join('{').split(' + ').join('+').split(' - ').join('-').split(' } ').join('}').split(' }').join('}').split('{ ').join('{').split(' / ').join('/').split(' < ').join('<').split(' > ').join('>').split(' ! ').join('!').split(' && ').join('&&').split(' || ').join('||').split(' === ').join('===').split(', ').join(',').split('; ').join(';').split(': ').join(':').split(' = ').join('=');
-                  }
-                }
-                arr[i].innerHTML = temp.join("'");
-                continue;
-              }
-              minifyElem(arr[i]);
+    +function minifyElem(el, arr, l, exx) {
+      arr = el.childNodes;
+      l = arr.length;
+      if (l > 0) {
+        for (let i = l - 1; i >= 0; i--) {
+          if (arr[i].nodeType === 3) {
+            if (arr[i - 1] && arr[i - 1].tagName === 'BLOCKQUOTE' && arr[i - 1].tagName === 'PRE') {
+              continue;
             }
+            else if (arr[i].data.search(/./) === -1) {
+              arr[i].remove();
+            } else {
+              arr[i].data = arr[i].data.split('\n').join('').split('            ').join(' ').split('          ').join(' ').split('        ').join(' ').split('      ').join(' ').split('    ').join(' ').split('  ').join(' ')
+            }
+          } else if (arr[i].nodeType === 1 && arr[i].tagName !== 'BLOCKQUOTE' && arr[i].tagName !== 'PRE') {
+            if (arr[i].tagName === 'SCRIPT' && arr[i].innerHTML.indexOf('`') < 3 && arr[i].innerHTML.indexOf('`') !== -1) {
+              continue;
+            }
+            if (arr[i].tagName === 'STYLE' || arr[i].tagName === 'SCRIPT') {
+              arr[i].innerHTML = arr[i].innerHTML.split('\n').join('').split('            ').join(' ').split('          ').join(' ').split('        ').join(' ').split('      ').join(' ').split('    ').join(' ').split('  ').join(' ');
+              temp = arr[i].innerHTML.split("'");
+              for (let i = 0, l = temp.length; i < l; i = i + 2) {
+                exx = temp[i].split('"');
+                if (exx.length) {
+                  for (let j = 0, ll = exx.length; j < ll; j = j + 2) {
+                    exx[j] = exx[j].split(' { ').join('{').split(' + ').join('+').split(' - ').join('-').split(' } ').join('}').split(' }').join('}').split('{ ').join('{').split(' / ').join('/').split(' < ').join('<').split(' > ').join('>').split(' ! ').join('!').split(' && ').join('&&').split(' || ').join('||').split(' === ').join('===').split(', ').join(',').split('; ').join(';').split(': ').join(':').split(' = ').join('=');
+                  }
+                  temp[i] = exx.join('"');
+                } else {
+                  temp[i] = temp[i].split(' { ').join('{').split(' + ').join('+').split(' - ').join('-').split(' } ').join('}').split(' }').join('}').split('{ ').join('{').split(' / ').join('/').split(' < ').join('<').split(' > ').join('>').split(' ! ').join('!').split(' && ').join('&&').split(' || ').join('||').split(' === ').join('===').split(', ').join(',').split('; ').join(';').split(': ').join(':').split(' = ').join('=');
+                }
+              }
+              arr[i].innerHTML = temp.join("'");
+              continue;
+            }
+            minifyElem(arr[i]);
           }
         }
-      }(el);
+      }
+    }(el);
     el.innerHTML = el.innerHTML.split('> <').join('><').split(':*@#<').join(': <');
   }
   function minifyJS(text) {
@@ -2593,7 +2481,6 @@ let mapList,host;client();function client() {
             outerHTML = el1.outerHTML + outerHTML;
           }
         }
-        //temp = projectName === 'Original' ? '/main/' : '/projects/' + projectName + '/main/';
         xhttp = httpSend('PUT', '/projects/' + projectName + '/main/' + pageNumber, outerHTML);
         addEl_setStyle();
         if (el2) {
@@ -2647,8 +2534,8 @@ let mapList,host;client();function client() {
         return;
       if (xhttp.status === 200) {
         list = xhttp.responseText.split(',');
-        // let length = list.length;
-        // console.log('length: ', length);
+        let length = list.length;
+        console.log('length: ', length);
         xhttp = httpSend('PUT', '/redis.txt', user);
         xhttp.onreadystatechange = function () {
           if (xhttp.readyState != 4)
@@ -2660,22 +2547,12 @@ let mapList,host;client();function client() {
               // loadDoc(response[0]);
               return;
             } else if (response[1]) {
-              // localStorage.setItem(projectName, prePage);
-              //console.log('\n***create OK: ' + response[0] + 'pre: ' + preFile + '***\n');
-              // localStorage.setItem(response[0], 'Common/Modern_JS_tutorial.html');
-              //console.log('res: ' + response);
-                loadNew(response[0]);
-                // let old = projectName; projectName = response[0]; let dev; let start = {}; if
-                // (path[3] === 'development.html') {  for (let i = 0; i < refs_CSS.length; i++)
-                // {    getBy(refs_CSS[i]).remove();  }  dev = getBy('_development_');  start =
-                // getBy('_button_start_');  path[3] = ''; } updateAllPages(list, length,
-                // dev, start, old); console.log('finish');
+              loadNew(response[0]);
             } else {
-              temp = confirm(t1 + ' уже зарегистрирован!'  + '\n Открыть сайт: ' + response[0] + '?');
-              if(temp){
+              temp = confirm(t1 + ' уже зарегистрирован!' + '\n Открыть сайт: ' + response[0] + '?');
+              if (temp) {
                 loadNew(response[0]);
               }
-              // alert('Alredy exist: ' + response[0]);
             }
           } else if (xhttp.status == 404) {
             alert('File:  NOT EXIST!\n maybe wrong pathname.');
@@ -2706,66 +2583,13 @@ let mapList,host;client();function client() {
         temp = xhttp.responseText;
         console.log('response: ', temp);
         if (temp) {
-            loadNew(temp);
-        } 
+          loadNew(temp);
+        }
       } else if (xhttp.status == 404) {
-        alert('Не зарегистрирован. Проверте ввод.');
+        alert(xhttp.responseText + ' не зарегистрирован. Проверте пароль.');
       } else
-        alert('failed: Internal Server Error');
+        alert('failed: Internal Server Error: ' + xhttp.status);
     };
-}
-  function updateAllPages(list, length, dev, start, name, button) {
-    //console.log('--- length: ' + length + '--- old: ' + old + ' dev: ' + dev);
-    if (length === 0) {
-      if (!button) {
-        length = projectName;
-        projectName = name;
-      } else {
-        preFile = name;
-      }
-      if (dev) {
-        path[3] = 'development.html'
-        document.body.appendChild(dev);
-        document.body.appendChild(start);
-        //loadCSS();
-      } else
-        loadDoc(preFile);
-      if (!button) {
-        setTimeout(loadNew, 200, length);
-        //loadNew(length);
-      }
-      //console.log('finish');
-    }
-    let file = list[--length];
-    if (file !== 'logup.html' && file !== 'login.html' && file !== 'template.html') {
-      //console.log('file: ' + file);
-      if (length >= 0) {
-        //console.log('length: ' + length);
-        loadDoc(file, () => {
-          if (button) {
-            let el = getBy('body_wrap_ajax');
-            el.appendChild(button);
-            if (el.id === 'template.html') {
-              el.id = name;
-            }
-          } else
-            getBy('button_develop').style.visibility = 'visible';
-          getBy('projectName').innerHTML = projectName;
-          let xhttp = httpSend('PUT', '/projects/' + projectName + '/main/' + file, document.body.innerHTML);
-          xhttp.onreadystatechange = function () {
-            if (xhttp.readyState != 4)
-              return;
-            if (xhttp.status === 200) {
-              //console.log(file);
-              setTimeout(updateAllPages, 50, list, length, dev, start, name, button);
-            } else {
-              alert('error ' + xhttp.status);
-            }
-          }
-        });
-      }
-    } else
-      updateAllPages(list, length, dev, start, name, button);
   }
   function deleteProject() {
     let confirm = window.confirm('The folder \"' + projectName + '\" and all its contents will be deleted permanently.\n ARE YOU SURE ?');
@@ -2800,7 +2624,7 @@ let mapList,host;client();function client() {
             } else {
               alert('Server error. Folder \"' + projectName + '\" NOT DELETED');
             }
-            // window.close();
+            window.close();
           };
         } else {
           console.log(projectName + ' already IS DELETED.');
@@ -2809,9 +2633,6 @@ let mapList,host;client();function client() {
       };
     }
   };
-  function deleteKeys() {
-    httpSend('DELETE', '/delete_redis_keys');
-  }
   function createFile() {
     let pageName = prompt('Enter file name', 'JavaScript_basics/My first page.html');
     if (pageName) {
@@ -2822,16 +2643,6 @@ let mapList,host;client();function client() {
           return;
         if (xhttp.status === 200) {
           let list = xhttp.responseText.split(',');
-          //let length = list.length;
-          //let button = document.createElement('button');
-          //button.innerHTML = pageName;
-          //button.setAttribute('onclick', 'loadDoc(\"' + pagename + '\")');
-          //button.id = pagename;
-          //localStorage.setItem(projectName, preFile);
-          //let dev = document.body.removeChild(getBy('div_development'));
-          //let start = document.body.removeChild(getBy('button_tools'));
-          //path[3] = '';
-          //updateAllPages(list, length, dev, start, pagename, button);
           console.log('created new: ' + pagename.split('_new_').join(''));
           console.log('list: ' + list);
         }
@@ -2880,10 +2691,6 @@ let mapList,host;client();function client() {
     setTimeout(open, 1000);
   }
   //****====== content page load =======
-  //   window.addEventListener('pageshow', function(event) {
-  //     console.log('pageshow:');
-  //     console.log(event);
-  // });
   if (!getBy('main')) return;
   media = new Media();
   if (pageNumber === 'g' || pageNumber === 'h') {
@@ -2893,7 +2700,6 @@ let mapList,host;client();function client() {
       setTimeout(loadPage, 1000, ifLogin);
     });
   } else if (pageNumber === 'l') {
-    //ifMap = pageNumber;
     loadPage(localStorage.getItem('if_map') || '0', () => {
       finalFunctions();
       setTimeout(loadPage, 1000, 'l');
@@ -2905,17 +2711,15 @@ let mapList,host;client();function client() {
 
   function finalFunctions() {
     getBy('project-name').innerHTML = projectName;
-    // window.scrollTo(0, localStorage.getItem('pageYOffset_' + projectName + '_' + pageNumber));
     if (!pageCommon && pageNumber !== '0' && localStorage.getItem('sidebar') === 'off')
       getBy('tool-bar_main').click();
-    //setHandlers();
     window.addEventListener('resize', media.mediaMax);
     window.addEventListener('scroll', media.mediaMax);
   }
   //*****========= STYLE ============
   function Media() {
     let width, style_1, style_2, ifLogin = false,
-      temp, sidebar, once, once1, arr, height, ifComment = false;
+      temp, sidebar, once = 1, once1, arr, height, ifComment = false;
     this.setMediaForLogin = function () {
       style_1 = getBy('log-').style.cssText;
       style_2 = getBy(0, 'log_content').style.cssText;
@@ -2959,14 +2763,13 @@ let mapList,host;client();function client() {
           temp.bottom = '-4px';
           sidebar.style.height = window.innerHeight - 61 + window.pageYOffset + 'px';
           getBy('project-').removeAttribute('style');
-        } else if(once) {
+        } else if (once && window.pageYOffset > 61) {
           once = 0;
           temp.position = 'fixed';
           temp.bottom = '';
           sidebar.style.height = window.innerHeight + 'px';
           getBy('project-').style.top = '0px';
         }
-        //height = getComputedStyle(sidebar.getElementsByTagName('share-')[0]).bottom;
         temp = getBy('share-');
         arr = getBy('sidebar-inner');
         if (window.innerHeight < sidebarHeight) {
@@ -2995,7 +2798,6 @@ let mapList,host;client();function client() {
             el.lastElementChild.style.display = 'table-caption';
             h3.textAlign = 'left';
             h3.marginLeft = '25px';
-            //document.body.style.overflow = 'hidden';
             el.style.overflowY = 'auto';
           } else {
             getBy('log-').style = style_1;
@@ -3194,10 +2996,6 @@ let mapList,host;client();function client() {
   }
   //************ MENU_LEFT **************************
 
-  // let buttonSave = document.createElement('button-save');
-  // buttonSave.innerHTML = 'save';
-  // buttonSave.setAttribute('js-hover', 'create_button_save');
-  // menuLeft.appendChild(buttonSave);
   const BUTTONS_SAVE_HTML = {
     'main': 'data-save_main',
     'CSS': 'data-save_css',
@@ -3232,11 +3030,6 @@ let mapList,host;client();function client() {
       reloadScripts();
     }
   }
-
-  // let buttonFile = document.createElement('button-file');
-  // buttonFile.innerHTML = 'file';
-  // buttonFile.setAttribute('js-hover', 'create_button_file');
-  // menuLeft.appendChild(buttonFile);
   const BUTTONS_FILE_HTML = {
     'change': 'data-change_html',
     'minify Code': 'data-minify_code',
@@ -3257,55 +3050,4 @@ let mapList,host;client();function client() {
       t3.appendChild(t1);
     }
   }
-  // LZW-compress a string
-  //function lzw_encode(s) {
-  //  var dict = {};
-  //  var data = (s + "").split("");
-  //  var out = [];
-  //  var currChar;
-  //  var phrase = data[0];
-  //  var code = 256;
-  //  for (var i = 1; i < data.length; i++) {
-  //    currChar = data[i];
-  //    if (dict[phrase + currChar] != null) {
-  //      phrase += currChar;
-  //    }
-  //    else {
-  //      out.push(phrase.length > 1 ? dict[phrase] : phrase.charCodeAt(0));
-  //      dict[phrase + currChar] = code;
-  //      code++;
-  //      phrase = currChar;
-  //    }
-  //  }
-  //  out.push(phrase.length > 1 ? dict[phrase] : phrase.charCodeAt(0));
-  //  for (var i = 0; i < out.length; i++) {
-  //    out[i] = String.fromCharCode(out[i]);
-  //  }
-  //  return out.join("");
-  //}
-  // Decompress an LZW-encoded string
-  //function lzw_decode(s) {
-  //  var dict = {};
-  //  var data = (s + "").split("");
-  //  var currChar = data[0];
-  //  var oldPhrase = currChar;
-  //  var out = [currChar];
-  //  var code = 256;
-  //  var phrase;
-  //  for (var i = 1; i < data.length; i++) {
-  //    var currCode = data[i].charCodeAt(0);
-  //    if (currCode < 256) {
-  //      phrase = data[i];
-  //    }
-  //    else {
-  //      phrase = dict[currCode] ? dict[currCode] : (oldPhrase + currChar);
-  //    }
-  //    out.push(phrase);
-  //    currChar = phrase[0];
-  //    dict[code] = oldPhrase + currChar;
-  //    code++;
-  //    oldPhrase = phrase;
-  //  }
-  //  return out.join("");
-  //}
 }

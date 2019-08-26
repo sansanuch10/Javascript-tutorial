@@ -6,23 +6,31 @@
 
 <body>
 
-  <style> .error { border-color: red; } </style>
-  Введите ваш возраст: <input type="text" id="input">
-  <div id="error"></div>
+  Введите ваш возраст:
+  <input type="text">
   <script>
-  input.onblur = function() {
-    if (isNaN(this.value)) { // введено не число
-      // показать ошибку
-      this.className = "error";
-      error.innerHTML = 'Вы ввели не число. Исправьте, пожалуйста.'
+    document.getElementsByTagName('input')[0].onkeypress = function(e) {
+      e = e || event;
+      if (e.ctrlKey || e.altKey || e.metaKey) return;
+      var chr = getChar(e);
+      // с null надо осторожно в неравенствах, т.к. например null >= '0' => true!
+      // на всякий случай лучше вынести проверку chr == null отдельно
+      if (chr == null) return;
+      if (chr < '0' || chr > '9') {
+        return false;
+      }
     }
-  };
-  input.onfocus = function() {
-    if (this.className == 'error') { // сбросить состояние "ошибка", если оно есть
-      this.className = "";
-      error.innerHTML = "";
+    function getChar(event) {
+      if (event.which == null) {
+        if (event.keyCode < 32) return null;
+        return String.fromCharCode(event.keyCode) // IE
+      }
+      if (event.which != 0 && event.charCode != 0) {
+        if (event.which < 32) return null;
+        return String.fromCharCode(event.which) // остальные
+      }
+      return null; // специальная клавиша
     }
-  };
   </script>
 
 </body>

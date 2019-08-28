@@ -1931,6 +1931,7 @@ let mapList, host; client(); function client() {
               doReload(res);
             } else {
               getBy('main').outerHTML = res;
+              setTimeout(createCodeExample, 0);
             }
             loadFrame();
             reloadScripts();
@@ -1951,8 +1952,6 @@ let mapList, host; client(); function client() {
           temp = getBy('h1');
           if (temp)
             document.getElementsByTagName('title')[0].text = temp.innerHTML;
-          setTimeout(createCodeExample, 0);
-          sidebarHeight = '';
           setTimeout(() => {
             el1 = getBy('share-');
             el2 = +getComputedStyle(el1).bottom.split('.')[0];
@@ -1962,7 +1961,7 @@ let mapList, host; client(); function client() {
             getCoordComments();
             media.mediaMax();
             window.addEventListener('scroll', media.mediaMax);
-          }, 500);
+          }, 100);
         }
         if (page[1]) {
           el = document.getElementsByTagName('task-open')[page[1] - 1];
@@ -2020,6 +2019,10 @@ let mapList, host; client(); function client() {
           setTimeout(() => {
             getBy(0, 'scrollintoview').scrollIntoView(false);
           }, 0);
+          return;
+        } else if (t === 'Современный учебник Javascript') {
+          el1[0].style.color = COLOR;
+          arr[0].previousElementSibling.click();
           return;
         }
       }

@@ -12,8 +12,8 @@ let mapList, host; client(); function client() {
       return t;
     }
   }());
-  let temp, page, pageRef, res, check, css, sheets, el, el1, el2, parent, xhttp, http1, arr = [], arrStyle = [];
-  let inner, media, tooltipElem, pageArr, pageNumber, pageNumberPre, pageCommon, progress;
+  let temp, page, pageRef, res, sheets, el, el1, el2, parent, xhttp, arr = [];
+  let media, tooltipElem, pageNumber, pageNumberPre, pageCommon, progress;
   let outerCSS = {
     '0': 'Modern_JS_tutorial',
     'a': 'courses',
@@ -1413,7 +1413,7 @@ let mapList, host; client(); function client() {
       }
     }
   }
-  let ifLogin, ifMap, nav, footer, screencast, blink, sidebarHeight, once = true;
+  let ifLogin, nav, footer, screencast, sideBarList, sidebarHeight, tableList, once = true;
   const COLOR = `#B20600`;
   let difference, style, offsetWidth;
 
@@ -2068,7 +2068,7 @@ let mapList, host; client(); function client() {
     initPageData(localStorage.getItem('if_login'));
     localStorage.setItem(projectName, pageNumber);
   }
-  let ext, id, file, start, link_1, link_2, script, outerHTML, dev, divBottom;
+  let script, outerHTML, dev, divBottom;
   function removeDisqus() {
     el = getBy(0, 'embed_js');
     if (el) {

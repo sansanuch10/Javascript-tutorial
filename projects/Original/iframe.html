@@ -6,59 +6,55 @@
 
 <body>
 
-    <style>
-      .icon {
-        width: 16px;
-        height: 16px;
-        float: left;
+  Введите текст(например, пароль) с нажатым CapsLock:
+  <input type="text" onkeyup="checkCapsWarning(event)" onfocus="checkCapsWarning(event)" onblur="removeCapsWarning()" />
+  <div style="display:none;color:red" id="capsIndicator">Внимание: нажат CapsLock!</div>
+  <script>
+    /**
+     * Текущее состояние CapsLock
+     *  - null : неизвестно
+     *  - true/false : CapsLock включен/выключен
+     */
+    var capsLockEnabled = null;
+    function getChar(event) {
+      if (event.which == null) {
+        if (event.keyCode < 32) return null;
+        return String.fromCharCode(event.keyCode) // IE
       }
-        
-      .open .icon {
-        cursor: pointer;
-        background: url(minus.gif);
+      if (event.which != 0 && event.charCode != 0) {
+        if (event.which < 32) return null;
+        return String.fromCharCode(event.which) // остальные
       }
-        
-      .closed .icon {
-        cursor: pointer;
-        background: url(plus.gif);
+      return null; // специальная клавиша
+    }
+    if (navigator.platform.substr(0, 3) != 'Mac') { // событие для CapsLock глючит под Mac
+      document.onkeydown = function(e) {
+        if (e.keyCode == 20 && capsLockEnabled !== null) {
+          capsLockEnabled = !capsLockEnabled;
+        }
       }
-        
-      .leaf .icon {
-        cursor: text;
-        background: url(article.gif);
+    }
+    document.onkeypress = function(e) {
+      e = e || event;
+      var chr = getChar(e);
+      if (!chr) return // special key
+      if (chr.toLowerCase() == chr.toUpperCase()) {
+        // символ, не зависящий от регистра, например пробел
+        // не может быть использован для определения CapsLock
+        return;
       }
-        
-      li {
-        list-style: none;
-      }
-        
-      .text {
-        margin: 6px 0 6px 16px;
-      }
-    </style>
-    <ul>
-      <li class="open">
-        <div class="icon"></div>
-        <div class="text">Раздел 1
-          <br>В две строки</div>
-        <ul>
-          <li class="closed">
-            <div class="icon"></div>
-            <div class="text">Раздел 1.1 в одну строку</div>
-          </li>
-          <li class="leaf">
-            <div class="icon"></div>
-            <div class="text">Страница 1.2
-              <br> в две строки</div>
-          </li>
-        </ul>
-      </li>
-      <li class="closed">
-        <div class="icon"></div>
-        <div class="text">Раздел 2
-          <br>В две строки</div>
-      </li>
-    </ul>
+      capsLockEnabled = (chr.toLowerCase() == chr && e.shiftKey) || (chr.toUpperCase() == chr && !e.shiftKey);
+    }
+    /**
+     * Проверить CapsLock
+     */
+    function checkCapsWarning() {
+      document.getElementById('capsIndicator').style.display = capsLockEnabled ? 'block' : 'none';
+    }
+    function removeCapsWarning() {
+      document.getElementById('capsIndicator').style.display = 'none';
+    }
+  </script>
 
 </body>
 </html>

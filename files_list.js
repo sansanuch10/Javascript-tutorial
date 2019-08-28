@@ -1,7 +1,7 @@
 function getFilesList() {
   if (!mapList) return;
-  let alfabet = ['0', '1', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o'];
-  let common = ['Modern_JS_tutorial', 'javaScript', 'courses', 'quiz', 'node_js', 'webpack', 'gulp', 'buy', 'login', 'logup', 'search', 'about_us', 'agreement', 'map', 'test_js_basic', 'test_dom', 'bug'];
+  let alfabet = ['0', '1', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p'];
+  let common = ['Modern_JS_tutorial', 'javaScript', 'courses', 'quiz', 'node_js', 'webpack', 'gulp', 'buy', 'login', 'logup', 'search', 'about_us', 'agreement', 'map', 'test_js_basic', 'test_dom', 'bug', 'js_load'];
   let len = common.length;
   let kSum = 0, temp, t, t1, l;
   for (let i = 0; i < len; i++) {

@@ -1,4 +1,4 @@
-let mapList, host; client(); function client() {
+let mapList,host;client();function client() {
   host = window.location.href.split('#')[0];
   let getBy = (function getByTagOrID() {
     let t;
@@ -12,8 +12,8 @@ let mapList, host; client(); function client() {
       return t;
     }
   }());
-  let temp, page, pageRef, res, sheets, el, el1, el2, parent, xhttp, arr = [];
-  let media, tooltipElem, pageNumber, pageNumberPre, pageCommon, progress;
+  let temp, page, pageRef, res, check, css, sheets, el, el1, el2, parent, xhttp, http1, arr = [], arrStyle = [];
+  let inner, media, tooltipElem, pageArr, pageNumber, pageNumberPre, pageCommon, progress;
   let outerCSS = {
     '0': 'Modern_JS_tutorial',
     'a': 'courses',
@@ -665,7 +665,7 @@ let mapList, host; client(); function client() {
         break;
       }
       case 'load_js': {
-        loadNew('load_js.html');
+        loadPage('p');
         break;
       }
       case 'load_bug': {
@@ -770,7 +770,7 @@ let mapList, host; client(); function client() {
         httpSend('PUT', '/projects/' + projectName + '/js/icon.js', temp);
         if (getBy(0, 'map')) {
           temp = map.toString() + ' map();';
-          //temp = minifyJS(temp);
+          temp = minifyJS(temp);
           httpSend('PUT', '/projects/' + projectName + '/js/map.js', temp);
         }
         if (getBy(0, 'files_list')) {
@@ -1413,7 +1413,7 @@ let mapList, host; client(); function client() {
       }
     }
   }
-  let ifLogin, nav, footer, screencast, sideBarList, sidebarHeight, tableList, once = true;
+  let ifLogin, nav, footer, screencast, sidebarHeight, once = true;
   const COLOR = `#B20600`;
   let difference, style, offsetWidth;
 

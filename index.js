@@ -2,12 +2,9 @@ function server() {
   "use strict";
   let http = require('http'), fs = require('fs'), path = require('path'), redis = require('redis');
   let port = process.env.PORT || 3000;
-  const DEVELOPMENT = true;
   const ADMIN = true;
-  const PATH = '/projects/Original';
   const INDEX = 'index.html';
   const ORIGINAL = 'Original';
-  const SECTION = 'Introduction';
   const LIST1 = 'map-list_1';
   const LIST3 = 'map-list_3';
   const PR = 'projects/';
@@ -15,8 +12,8 @@ function server() {
   const HTML = '.html';
   const SLASH = '/';
 
-  let projectName = ORIGINAL, temp, url, url_pathname, pathname, p, project, templ, user, file, extname, source, stream, streamRead, f, vote = 0;
-  let files = [], tableList = {}, tablesLinks = [], javascript = {}, mapList = {}, pathFor_addScript, el, el1, arr, m, t;
+  let projectName = ORIGINAL, temp, url, url_pathname, pathname, p, project, templ, user, file, source, stream, streamRead, f, vote = 0;
+  let files = [], tableList = {}, mapList = {}, pathFor_addScript, el, el1, arr, m, t;
   let sideBarsList = [], sideBarList = {}, addition = [], add = {}, lengthSum, lengthSection;
   initServer();
   function initServer() {
@@ -684,24 +681,6 @@ function server() {
             }
             break;
           }
-          //console.log('get');
-          //if (file === 'iframe.html') {
-          //  fs.readFile(pathname, 'utf8',
-          //    (err, data) => {
-          //      if (err) {
-          //        if (err.code === 'ENOENT') {
-          //          res.statusCode = 404;
-          //        } else
-          //          res.statusCode = 500;
-          //        // console.log('err1: ' + err);
-          //        res.end();
-          //        return;
-          //      }
-          //      //temp = url.path.split('?')[1];
-          //      //data = data.split('<body></body>').join(temp);
-          //      res.end(data);
-          //    });
-          //} else
           sendFile(projectName, file, res);
           break;
         case 'POST':
